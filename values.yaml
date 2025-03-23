@@ -1,6 +1,6 @@
 replicaCount: 3
 image:
-  repository: nodejs-app
+  repository: nodejs
   tag: latest
   pullPolicy: IfNotPresent
 service:
