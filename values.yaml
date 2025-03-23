@@ -1,0 +1,27 @@
+replicaCount: 3
+image:
+  repository: nodejs-app
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 3000
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+nodeSelector:
+  pool: application-pool
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app
+              operator: In
+              values:
+                - nodejs-app
+        topologyKey: "kubernetes.io/hostname"
