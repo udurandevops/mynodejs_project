@@ -1,11 +1,14 @@
 replicaCount: 3
+
 image:
-  repository: nodejs
+  repository: your-private-registry/nodejs-app
   tag: latest
   pullPolicy: IfNotPresent
+
 service:
   type: ClusterIP
   port: 3000
+
 resources:
   limits:
     cpu: 500m
@@ -13,8 +16,10 @@ resources:
   requests:
     cpu: 200m
     memory: 256Mi
+
 nodeSelector:
   pool: application-pool
+
 affinity:
   podAntiAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
